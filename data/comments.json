@@ -22,5 +22,11 @@
     "postId": 3,
     "author": "Grace",
     "content": "Est-ce que tu feras un article sur les routeurs ?"
+  },
+  {
+    "id": 5,
+    "idpost": 3,
+    "author": "Léo",
+    "content": "Super article ! Tu pourrais aussi parler des switchs la prochaine fois ?"
   }
 ]

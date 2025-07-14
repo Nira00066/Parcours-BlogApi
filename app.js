@@ -135,7 +135,7 @@ app.get("/posts/:id/comments", (req, res) => {
 
   try {
     const comments = readJson(comPath);
-    const commentsDupost = comments.filter((c)=> c.postId === postId)
+    const commentsDupost = comments.filter((c) => c.postId === postId);
     res.json(commentsDupost);
   } catch (err) {
     res.status(500).json({ message: "Erreur lors de la lecture " });
@@ -143,21 +143,48 @@ app.get("/posts/:id/comments", (req, res) => {
 });
 
 
-app.post("/posts/:id/comments",(req,res)=>{
- const newComment = req.body;
+
+
+
+app.post("/posts/:id/comments", (req, res) => {
+  const newComment = req.body;
   console.log("ici 1");
-  if (!newComment.content || !newComment.author){
+  if (!newComment.content || !newComment.author) {
     res.status(400).send("il nous manque sois le contenu sois l'author");
-  };
-
-  try{
-    console.log('ici 2');
-
-
-    
   }
 
-})
+  try {
+    console.log("ici 2");
+
+    const comments = readJson(comPath);
+
+    const nextId =
+      comments.length > 0 ? comments[comments.length - 1].id + 1 : 1;
+
+    console.log("Prochain ID :", nextId);
+
+    let comToAdd = {
+      id: nextId,
+      idpost: newComment.postId,
+      author: newComment.author,
+      content: newComment.content,
+    };
+    console.log("ici 5");
+
+    comments.push(comToAdd);
+    console.log("ici 6");
+
+    writeJson(comPath, comments);
+    console.log("ici 7");
+  } catch (err) {
+    res.status(201).send("erreur");
+    console.log("erreur");
+  }
+
+
+  //  ? je m'attendais a devoir prendre la donée du post 
+
+});
 // Lancement du serveur
 const PORT = 3000;
 app.listen(PORT, () => {
