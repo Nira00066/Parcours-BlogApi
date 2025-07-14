@@ -185,6 +185,18 @@ app.post("/posts/:id/comments", (req, res) => {
   //  ? je m'attendais a devoir prendre la donée du post 
 
 });
+
+
+app.delete("/posts/:id/comments",(req,res)=>{
+
+  const comId = parseInt(req.params.id);
+  comments.splice(comId-1,1);
+  fs.writeFileSync(comPath,JSON.stringify(comments));
+  res.status(204).end();
+  console.log('commentaire supp');
+})
+
+
 // Lancement du serveur
 const PORT = 3000;
 app.listen(PORT, () => {

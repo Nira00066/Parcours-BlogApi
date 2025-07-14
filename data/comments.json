@@ -1,11 +1,5 @@
 [
   {
-    "id": 1,
-    "postId": 1,
-    "author": "David",
-    "content": "Félicitations pour le lancement !"
-  },
-  {
     "id": 2,
     "postId": 2,
     "author": "Emma",
